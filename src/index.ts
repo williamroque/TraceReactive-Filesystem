@@ -45,6 +45,7 @@ const serializableNodes = nodes.map(n => ({
     typeId: n.typeId,
     displayName: n.displayName,
     category: n.category,
+    nodeInterface: n.nodeInterface,
     visible: n.visible,
     inputs: n.inputs,
     outputs: n.outputs,
@@ -63,10 +64,3 @@ traceReactive.onEvaluateNode(async ({ typeId, inputs, properties }: any) => {
     }
     return await node.evaluate(inputs, properties);
 });
-
-// Since EventNodes need manual registration handling when nodes are added to/removed from canvas:
-// TraceReactive main app would call these, but right now the sandbox evaluate wrapper doesn't 
-// have an explicit event node lifecycle. 
-// A typical pattern in TraceReactive for event nodes is to handle registration when they are first evaluated or via a dedicated hook.
-// For now, since `onEvaluateNode` handles `evaluate()`, we map an implicit lifecycle if needed.
-// If TraceReactive adds `onRegisterEventNode` to preload in the future, we would bind it here.
