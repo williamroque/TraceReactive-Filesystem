@@ -1,7 +1,9 @@
 import { EventNode } from '@tracereactive/types';
 import type { InputDefinition, OutputDefinition, PropertyDefinition } from '@tracereactive/types';
 
-declare const traceReactive: any;
+import type { TraceReactiveAPI } from '@tracereactive/types';
+
+declare const traceReactive: TraceReactiveAPI;
 
 export class FileWatcherNode extends EventNode {
     readonly typeId = 'fs-watch-file';

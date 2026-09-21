@@ -1,7 +1,9 @@
 import { ExecuteNode } from '@tracereactive/types';
 import type { InputDefinition, OutputDefinition, PropertyDefinition } from '@tracereactive/types';
 
-declare const traceReactive: any;
+import type { TraceReactiveAPI } from '@tracereactive/types';
+
+declare const traceReactive: TraceReactiveAPI;
 
 import { join } from '../../utils/PathUtils';
 

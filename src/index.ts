@@ -19,7 +19,9 @@ import { UnzipNode } from './nodes/operations/UnzipNode';
 
 import { ChoosePathNode } from './nodes/io/ChoosePathNode';
 
-declare const traceReactive: any;
+import type { TraceReactiveAPI } from '@tracereactive/types';
+
+declare const traceReactive: TraceReactiveAPI;
 
 // 1. Instantiate the nodes
 const nodes = [

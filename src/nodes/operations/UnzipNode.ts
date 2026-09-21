@@ -1,7 +1,9 @@
 import { ExecuteNode } from '@tracereactive/types';
 import type { InputDefinition, OutputDefinition, PropertyDefinition } from '@tracereactive/types';
 
-declare const traceReactive: any;
+import type { TraceReactiveAPI } from '@tracereactive/types';
+
+declare const traceReactive: TraceReactiveAPI;
 
 export class UnzipNode extends ExecuteNode {
     readonly category = { name: 'Filesystem', accent: 'blue-500' } as any;
