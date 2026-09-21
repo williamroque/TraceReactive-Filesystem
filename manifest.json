@@ -25,7 +25,8 @@
       "id": "fs:path-array",
       "label": "Path Array",
       "color": "indigo-400",
-      "compatibleWith": ["fs:path", "core:array"]
+      "compatibleWith": ["fs:path", "core:array"],
+      "elementType": "fs:path"
     }
   ]
 }
