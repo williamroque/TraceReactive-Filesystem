@@ -14,6 +14,8 @@ import { WriteFileNode } from './nodes/io/WriteFileNode';
 import { CopyFileNode } from './nodes/io/CopyFileNode';
 import { MoveFileNode } from './nodes/io/MoveFileNode';
 import { MoveToTrashNode } from './nodes/io/MoveToTrashNode';
+import { ZipNode } from './nodes/operations/ZipNode';
+import { UnzipNode } from './nodes/operations/UnzipNode';
 
 import { ChoosePathNode } from './nodes/io/ChoosePathNode';
 
@@ -37,6 +39,8 @@ const nodes = [
     new CopyFileNode(),
     new MoveFileNode(),
     new MoveToTrashNode(),
+    new ZipNode(),
+    new UnzipNode(),
     new ChoosePathNode()
 ];
 
