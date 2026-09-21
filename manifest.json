@@ -1,0 +1,31 @@
+{
+  "id": "com.tracereactive.filesystem",
+  "name": "Filesystem",
+  "version": "1.0.0",
+  "description": "Nodes for interacting with the local filesystem (reading, writing, watching, and path manipulation).",
+  "main": "dist/index.js",
+  "permissions": [
+    "fs:read",
+    "fs:write",
+    "fs:manage",
+    "fs:delete"
+  ],
+  "ioTypes": [
+    {
+      "id": "fs:path",
+      "label": "Path",
+      "color": "indigo-400"
+    },
+    {
+      "id": "fs:stat",
+      "label": "File Stat",
+      "color": "sky-400"
+    },
+    {
+      "id": "fs:path-array",
+      "label": "Path Array",
+      "color": "indigo-400",
+      "compatibleWith": ["fs:path", "core:array"]
+    }
+  ]
+}
