@@ -14,8 +14,8 @@ export class CopyFileNode extends ExecuteNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Source', acceptsType: 'fs:path' },
-        { name: 'Destination', acceptsType: 'fs:path' }
+        { name: 'Source', acceptsType: 'core:path' },
+        { name: 'Destination', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [

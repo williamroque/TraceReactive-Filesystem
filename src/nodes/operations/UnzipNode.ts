@@ -12,8 +12,8 @@ export class UnzipNode extends ExecuteNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Zip File', acceptsType: 'fs:path' },
-        { name: 'Destination Directory', acceptsType: 'fs:path' }
+        { name: 'Zip File', acceptsType: 'core:path' },
+        { name: 'Destination Directory', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [

@@ -12,7 +12,7 @@ export class WriteFileNode extends ExecuteNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Path', acceptsType: 'fs:path' },
+        { name: 'Path', acceptsType: 'core:path' },
         { name: 'Content', acceptsType: 'core:string' }
     ];
 

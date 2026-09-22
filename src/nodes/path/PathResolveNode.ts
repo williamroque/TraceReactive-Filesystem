@@ -9,12 +9,12 @@ export class PathResolveNode extends BaseNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Path 1', acceptsType: 'fs:path' },
-        { name: 'Path 2', acceptsType: 'fs:path' }
+        { name: 'Path 1', acceptsType: 'core:path' },
+        { name: 'Path 2', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Path', outputType: 'fs:path' }
+        { name: 'Path', outputType: 'core:path' }
     ];
 
     readonly properties: PropertyDefinition[] = [];

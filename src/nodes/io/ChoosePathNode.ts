@@ -10,7 +10,7 @@ export class ChoosePathNode extends BaseNode {
     readonly inputs: InputDefinition[] = [];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Path', outputType: 'fs:path' }
+        { name: 'Path', outputType: 'core:path' }
     ];
 
     readonly properties: PropertyDefinition[] = [

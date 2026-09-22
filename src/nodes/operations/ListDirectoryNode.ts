@@ -14,11 +14,11 @@ export class ListDirectoryNode extends ExecuteNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Path', acceptsType: 'fs:path' }
+        { name: 'Path', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Files', outputType: 'fs:path-array' }
+        { name: 'Files', outputType: 'core:path-array' }
     ];
 
     readonly properties: PropertyDefinition[] = [];

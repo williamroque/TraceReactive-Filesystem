@@ -9,11 +9,11 @@ export class PathDirnameNode extends BaseNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Path', acceptsType: 'fs:path' }
+        { name: 'Path', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Dirname', outputType: 'fs:path' }
+        { name: 'Dirname', outputType: 'core:path' }
     ];
 
     readonly properties: PropertyDefinition[] = [];

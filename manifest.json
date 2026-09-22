@@ -12,21 +12,9 @@
   ],
   "ioTypes": [
     {
-      "id": "fs:path",
-      "label": "Path",
-      "color": "indigo-400"
-    },
-    {
       "id": "fs:stat",
       "label": "File Stat",
       "color": "sky-400"
-    },
-    {
-      "id": "fs:path-array",
-      "label": "Path Array",
-      "color": "indigo-400",
-      "compatibleWith": ["fs:path", "core:array"],
-      "elementType": "fs:path"
     }
   ]
 }

@@ -14,7 +14,7 @@ export class DirectoryWatcherNode extends EventNode {
     readonly inputs: InputDefinition[] = [];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Path', outputType: 'fs:path' },
+        { name: 'Path', outputType: 'core:path' },
         { name: 'Event Name', outputType: 'core:string' }
     ];
 

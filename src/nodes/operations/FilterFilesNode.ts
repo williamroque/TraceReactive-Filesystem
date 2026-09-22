@@ -8,11 +8,11 @@ export class FilterFilesNode extends BaseNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Files', acceptsType: 'fs:path-array' }
+        { name: 'Files', acceptsType: 'core:path-array' }
     ];
 
     readonly outputs: OutputDefinition[] = [
-        { name: 'Filtered Files', outputType: 'fs:path-array' }
+        { name: 'Filtered Files', outputType: 'core:path-array' }
     ];
 
     readonly properties: PropertyDefinition[] = [

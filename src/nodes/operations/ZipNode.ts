@@ -12,8 +12,8 @@ export class ZipNode extends ExecuteNode {
     readonly visible = true;
 
     readonly inputs: InputDefinition[] = [
-        { name: 'Source', acceptsType: 'fs:path' },
-        { name: 'Destination Zip', acceptsType: 'fs:path' }
+        { name: 'Source', acceptsType: 'core:path' },
+        { name: 'Destination Zip', acceptsType: 'core:path' }
     ];
 
     readonly outputs: OutputDefinition[] = [
