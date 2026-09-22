@@ -10,6 +10,7 @@ import { FilterFilesNode } from './nodes/operations/FilterFilesNode';
 import { FileStatNode } from './nodes/operations/FileStatNode';
 import { MakeDirectoryNode } from './nodes/operations/MakeDirectoryNode';
 import { ReadFileNode } from './nodes/io/ReadFileNode';
+import { ReadPdfNode } from './nodes/io/ReadPdfNode';
 import { WriteFileNode } from './nodes/io/WriteFileNode';
 import { CopyFileNode } from './nodes/io/CopyFileNode';
 import { MoveFileNode } from './nodes/io/MoveFileNode';
@@ -37,6 +38,7 @@ const nodes = [
     new FileStatNode(),
     new MakeDirectoryNode(),
     new ReadFileNode(),
+    new ReadPdfNode(),
     new WriteFileNode(),
     new CopyFileNode(),
     new MoveFileNode(),
