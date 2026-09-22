@@ -48,8 +48,23 @@ export class CopyFileNode extends ExecuteNode {
                 if (isDestArray) {
                     destPath = String(destinations[i]);
                 } else {
-                    // If scalar dest, we assume it's a directory and join it with the source's basename
-                    destPath = join(scalarDestDir, basename(srcPath));
+                    let destIsDirectory = false;
+                    try {
+                        const stat = await traceReactive.fs.stat(scalarDestDir);
+                        if (stat.isDirectory) {
+                            destIsDirectory = true;
+                        }
+                    } catch {
+                        if (scalarDestDir.endsWith('/') || scalarDestDir.endsWith('\\')) {
+                            destIsDirectory = true;
+                        }
+                    }
+
+                    if (destIsDirectory) {
+                        destPath = join(scalarDestDir, basename(srcPath));
+                    } else {
+                        destPath = scalarDestDir;
+                    }
                 }
 
                 await traceReactive.fs.copy(srcPath, destPath);

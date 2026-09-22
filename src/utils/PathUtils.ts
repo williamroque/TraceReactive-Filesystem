@@ -5,13 +5,17 @@ export function isWindows(pathStr: string): boolean {
     return /^[a-zA-Z]:[\\/]/.test(pathStr) || pathStr.includes('\\');
 }
 
-export function basename(pathStr: string): string {
+export function basename(pathStr: string, ext?: string): string {
     const isWin = isWindows(pathStr);
     const separator = isWin ? /[\\/]/ : /\//;
     const parts = pathStr.split(separator).filter(Boolean);
     if (parts.length === 0) return '';
     const lastPart = parts[parts.length - 1];
     if (isWin && /^[a-zA-Z]:$/.test(lastPart)) return ''; // Just a drive letter
+    
+    if (ext && lastPart.endsWith(ext)) {
+        return lastPart.slice(0, -ext.length);
+    }
     return lastPart;
 }
 

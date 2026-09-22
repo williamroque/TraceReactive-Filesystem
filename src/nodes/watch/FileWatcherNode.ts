@@ -23,22 +23,38 @@ export class FileWatcherNode extends EventNode {
     ];
 
     private watchIds: Map<string, string> = new Map();
+    private emitFunctions: Map<string, (nodeId: string) => void> = new Map();
     private eventCleanup: (() => void) | null = null;
 
-    register(nodeId: string, emit: (nodeId: string) => void): void {
+    private setupListener() {
         if (!this.eventCleanup) {
             this.eventCleanup = traceReactive.fs.onWatchEvent((watchId: string, eventName: string, path: string) => {
-                // If this watchId belongs to this node instance, emit
-                if (Array.from(this.watchIds.values()).includes(watchId)) {
-                    // Update latest output data
-                    // Actually, EventNode doesn't have a direct way to push data here natively without a custom cache
-                    // But we can store it on the global window or a local map for `evaluate` to pick up.
-                    // To keep it simple, we use a static map.
-                    FileWatcherNode.latestEvents.set(nodeId, { path, eventName });
-                    emit(nodeId);
+                let targetNodeId: string | undefined;
+                for (const [id, wId] of this.watchIds.entries()) {
+                    if (wId === watchId) {
+                        targetNodeId = id;
+                        break;
+                    }
+                }
+
+                if (targetNodeId) {
+                    FileWatcherNode.latestEvents.set(targetNodeId, { path, eventName });
+                    if (typeof traceReactive !== 'undefined' && traceReactive.emitEvent) {
+                        traceReactive.emitEvent(targetNodeId);
+                    } else {
+                        const targetEmit = this.emitFunctions.get(targetNodeId);
+                        if (targetEmit) {
+                            targetEmit(targetNodeId);
+                        }
+                    }
                 }
             });
         }
+    }
+
+    register(nodeId: string, emit: (nodeId: string) => void): void {
+        this.emitFunctions.set(nodeId, emit);
+        this.setupListener();
     }
 
     async unregister(nodeId: string): void {
@@ -47,10 +63,17 @@ export class FileWatcherNode extends EventNode {
             await traceReactive.fs.unwatch(watchId);
             this.watchIds.delete(nodeId);
         }
+        this.emitFunctions.delete(nodeId);
         FileWatcherNode.latestEvents.delete(nodeId);
+        
+        if (this.watchIds.size === 0 && this.eventCleanup) {
+            this.eventCleanup();
+            this.eventCleanup = null;
+        }
     }
 
     async evaluate(inputs: Record<string, any>, properties: Record<string, any>): Promise<Record<string, any>> {
+        this.setupListener();
         const path = properties['path'];
         const nodeId = properties['_nodeId'];
 

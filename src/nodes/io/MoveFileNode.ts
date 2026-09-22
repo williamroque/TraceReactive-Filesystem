@@ -48,7 +48,23 @@ export class MoveFileNode extends ExecuteNode {
                 if (isDestArray) {
                     destPath = String(destinations[i]);
                 } else {
-                    destPath = join(scalarDestDir, basename(srcPath));
+                    let destIsDirectory = false;
+                    try {
+                        const stat = await traceReactive.fs.stat(scalarDestDir);
+                        if (stat.isDirectory) {
+                            destIsDirectory = true;
+                        }
+                    } catch {
+                        if (scalarDestDir.endsWith('/') || scalarDestDir.endsWith('\\')) {
+                            destIsDirectory = true;
+                        }
+                    }
+
+                    if (destIsDirectory) {
+                        destPath = join(scalarDestDir, basename(srcPath));
+                    } else {
+                        destPath = scalarDestDir;
+                    }
                 }
 
                 await traceReactive.fs.move(srcPath, destPath);
