@@ -20,21 +20,39 @@ export class FilterFilesNode extends BaseNode {
     ];
 
     readonly properties: PropertyDefinition[] = [
-        { name: 'extension', label: 'Extension filter (e.g. .csv)', type: 'text' as const, defaultValue: '' },
+        { name: 'pattern', label: 'Pattern (glob, comma separated)', type: 'text' as const, defaultValue: '' },
         { name: 'onlyDirectories', label: 'Only Directories', type: 'boolean' as const, defaultValue: false }
     ];
 
     async evaluate(inputs: Record<string, any>, properties: Record<string, any>): Promise<Record<string, any>> {
         const files = inputs['Files'];
-        const extension = properties['extension'] as string;
+        const pattern = properties['pattern'] as string;
         const onlyDirectories = properties['onlyDirectories'] as boolean;
 
         if (!Array.isArray(files)) return { 'Filtered Files': [] };
-        if (!extension && !onlyDirectories) return { 'Filtered Files': files };
+        if (!pattern && !onlyDirectories) return { 'Filtered Files': files };
+
+        let regexes: RegExp[] = [];
+        if (pattern) {
+            const patterns = pattern.split(',').map(p => p.trim()).filter(Boolean);
+            regexes = patterns.map(p => {
+                let regexStr = '^';
+                for (let i = 0; i < p.length; i++) {
+                    const c = p[i];
+                    if (c === '*') regexStr += '.*';
+                    else if (c === '?') regexStr += '.';
+                    else if (/[.+^${}()|[\]\\]/.test(c)) regexStr += '\\' + c;
+                    else regexStr += c;
+                }
+                regexStr += '$';
+                return new RegExp(regexStr, 'i');
+            });
+        }
 
         const results = await Promise.all(files.map(async (f: string) => {
-            if (extension && !f.endsWith(extension)) {
-                return false;
+            if (regexes.length > 0) {
+                const matchesPattern = regexes.some(r => r.test(f) || r.test(f.split('/').pop() || '') || r.test(f.split('\\').pop() || ''));
+                if (!matchesPattern) return false;
             }
             if (onlyDirectories) {
                 try {
