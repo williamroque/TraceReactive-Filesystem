@@ -10,7 +10,7 @@ export class PathJoinNode extends BaseNode {
 
     readonly inputs: InputDefinition[] = [
         { name: 'Path 1', acceptsType: 'core:path' },
-        { name: 'Path 2', acceptsType: 'core:path' }
+        { name: 'Path 2', acceptsType: ['core:path', 'core:string'] }
     ];
 
     readonly outputs: OutputDefinition[] = [
