@@ -3,6 +3,7 @@ import { PathResolveNode } from './nodes/path/PathResolveNode';
 import { PathBasenameNode } from './nodes/path/PathBasenameNode';
 import { PathDirnameNode } from './nodes/path/PathDirnameNode';
 import { PathExtnameNode } from './nodes/path/PathExtnameNode';
+import { CurrentDirectoryNode } from './nodes/path/CurrentDirectoryNode';
 import { FileWatcherNode } from './nodes/watch/FileWatcherNode';
 import { DirectoryWatcherNode } from './nodes/watch/DirectoryWatcherNode';
 import { ListDirectoryNode } from './nodes/operations/ListDirectoryNode';
@@ -31,6 +32,7 @@ const nodes = [
     new PathBasenameNode(),
     new PathDirnameNode(),
     new PathExtnameNode(),
+    new CurrentDirectoryNode(),
     new FileWatcherNode(),
     new DirectoryWatcherNode(),
     new ListDirectoryNode(),
