@@ -1,8 +1,12 @@
 import { ExecuteNode } from '@tracereactive/types';
 import type { InputDefinition, OutputDefinition, PropertyDefinition } from '@tracereactive/types';
 import type { TraceReactiveAPI } from '@tracereactive/types';
-import pdfParse from 'pdf-parse';
+import { PDFParse } from 'pdf-parse';
 import { Buffer } from 'buffer';
+import { workerData } from './workerData';
+
+// Set the worker source using the bundled base64 string provided by pdf-parse
+PDFParse.setWorker(workerData);
 
 declare const traceReactive: TraceReactiveAPI;
 
@@ -28,7 +32,8 @@ export class ReadPdfNode extends ExecuteNode {
         
         try {
             const dataBase64 = await traceReactive.fs.readFile(p, 'base64' as any);
-            const pdfData = await pdfParse(Buffer.from(dataBase64, 'base64'));
+            const parser = new PDFParse({ data: Buffer.from(dataBase64, 'base64') });
+            const pdfData = await parser.getText();
             
             return { 'Content': pdfData.text };
         } catch (err) {

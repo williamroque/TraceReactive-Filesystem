@@ -4,6 +4,7 @@
   "description": "TraceReactive Filesystem package",
   "main": "dist/index.js",
   "scripts": {
+    "prebuild": "node scripts/extract-worker.js",
     "build": "esbuild src/index.ts --bundle --outfile=dist/index.js --platform=browser --format=iife --global-name=__TraceReactive_Package",
     "build:trpkg": "npm run build && node scripts/build-trpkg.js",
     "dev": "npm run build -- --watch"
