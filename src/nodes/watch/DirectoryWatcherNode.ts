@@ -19,7 +19,13 @@ export class DirectoryWatcherNode extends EventNode {
     ];
 
     readonly properties: PropertyDefinition[] = [
-        { name: 'path', label: 'Directory path', type: 'filepath' as const, defaultValue: '' },
+        {
+            name: 'path',
+            label: 'Directory path',
+            type: 'filepath' as const,
+            defaultValue: '',
+            dialogProperties: ['openDirectory']
+        },
         { name: 'depth', label: 'Depth', type: 'number' as const, defaultValue: 0, min: 0 }
     ];
 
